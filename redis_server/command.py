@@ -32,10 +32,9 @@ class CommandHandler:
         return simple_string(" ".join(args)) if args else simple_string("")
     
     def set(self, *args):
-        if len(args) != 2:
-            return error("SET command requires 2 arguments")
-        key, value = args
-        self.storage.set(key, value)
+        if len(args) < 2:
+            return error("wrong number of arguments for 'set' command")
+        self.storage.set(args[0], " ".join(args[1:]))
         return ok()
     
     def get(self, *args):
